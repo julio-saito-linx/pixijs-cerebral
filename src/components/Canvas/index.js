@@ -5,10 +5,11 @@ import {connect} from 'cerebral/react'
 // noinspection JSFileReferences
 import * as PIXI from 'pixi.js'
 import './styles.css'
+import * as util from './util'
 
 export default connect({
   rotationSpeed: 'sunRotation.rotationSpeed'
-  },
+},
   class Canvas extends Component {
     /**
      * Define our prop types
@@ -33,7 +34,24 @@ export default connect({
      * and hook up the PixiJS renderer
      **/
     componentDidMount () {
-      this.renderer = PIXI.autoDetectRenderer(640, 500, {backgroundColor: 0xcccccc})
+      const clientSize = {
+        width: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+        height: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+      }
+
+      // get input[range] position
+      let position = util.getPosition(document.querySelector('input[type="range"]'))
+      let yBottonInputRange = position.y + 23
+
+      const MARGIN = 20
+      const canvasSize = {
+        width: clientSize.width - MARGIN * 2,
+        height: (clientSize.height - yBottonInputRange) - MARGIN * 2
+      }
+
+      this.renderer = PIXI.autoDetectRenderer(canvasSize.width, canvasSize.height, {
+        backgroundColor: 0xcccccc
+      })
       this.refs.gameCanvas.appendChild(this.renderer.view)
 
       // create the root of the scene graph
@@ -50,8 +68,8 @@ export default connect({
       this.sum.anchor.y = 0.5
 
       // move the sprite to the center of the screen
-      this.sum.position.x = 320
-      this.sum.position.y = 250
+      this.sum.position.x = canvasSize.width / 2
+      this.sum.position.y = canvasSize.height / 2
 
       this.stage.addChild(this.sum)
 
@@ -107,3 +125,4 @@ export default connect({
     }
   }
 )
+

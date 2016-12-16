@@ -8,15 +8,17 @@ export default Controller({
   options: {
     // Use strict rendering
     strictRender: true,
-
-    // Time travel
-    storeMutations: true,
-
     // Expose props.signals with all signals in components
     signalsProp: false
   },
 
-  devtools: process.env.NODE_ENV === 'production' ? null : Devtools(),
+  // devtools: process.env.NODE_ENV === 'production' ? null : Devtools(),
+  devtools: Devtools({
+    // If running standalone debugger
+    // remoteDebugger: 'localhost:8585',
+    // Time travel
+    storeMutations: false
+  }),
 
   // Defines the top level state
   state: {
