@@ -2,11 +2,16 @@ import {Controller} from 'cerebral'
 import Devtools from 'cerebral/devtools'
 import Router from 'cerebral-router'
 import { set, state } from 'cerebral/operators'
+import sunRotation from './modules/sunRotationModule'
 
 export default Controller({
   options: {
     // Use strict rendering
     strictRender: true,
+
+    // Time travel
+    storeMutations: true,
+
     // Expose props.signals with all signals in components
     signalsProp: false
   },
@@ -22,12 +27,14 @@ export default Controller({
   // Defines the top level signals
   signals: {
     routed: [
-      set(state`currentPage`, 'home')
+      set(state`currentPage`, 'sunRotation')
     ]
   },
 
   // Defines the top level modules
-  modules: {},
+  modules: {
+    sunRotation
+  },
 
   router: Router({
     routes: {

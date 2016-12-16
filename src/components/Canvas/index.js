@@ -6,7 +6,9 @@ import {connect} from 'cerebral/react'
 import * as PIXI from 'pixi.js'
 import './styles.css'
 
-export default connect({},
+export default connect({
+  rotationSpeed: 'sunRotation.rotationSpeed'
+  },
   class Canvas extends Component {
     /**
      * Define our prop types
@@ -88,7 +90,7 @@ export default connect({},
      **/
     animate () {
       // just for fun, let's rotate mr rabbit a little
-      this.sum.rotation += 0.03
+      this.sum.rotation += this.props.rotationSpeed
 
       // render the stage container
       this.renderer.render(this.stage)

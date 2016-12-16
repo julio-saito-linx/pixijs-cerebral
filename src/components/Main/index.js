@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from 'cerebral/react'
-import SumRotation from '../SumRotation'
+import SunRotation from '../SunRotation'
 import './styles.css'
 
 const pages = {
-  home: SumRotation
+  sunRotation: SunRotation
 }
 
 export default connect({
