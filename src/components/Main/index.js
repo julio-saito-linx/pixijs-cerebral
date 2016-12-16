@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from 'cerebral/react'
-import Home from '../Home'
+import SumRotation from '../SumRotation'
 import './styles.css'
 
 const pages = {
-  home: Home
+  home: SumRotation
 }
 
 export default connect({
@@ -14,13 +14,11 @@ export default connect({
   function App (props) {
     const Page = pages[props.currentPage]
     return (
-      <div className='o-container o-container--medium'>
+      <div className='container'>
         <h1>{props.title}</h1>
 
         {pages[props.currentPage] && (
-          <section className='main-container'>
-            <Page />
-          </section>
+          <Page />
         )}
 
       </div>
