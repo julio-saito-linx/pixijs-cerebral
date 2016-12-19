@@ -8,7 +8,7 @@ import './styles.css'
 import * as util from './util'
 
 export default connect({
-  rotationSpeed: 'sunRotation.rotationSpeed'
+  rotationSpeed: 'sunRotationModule.rotationSpeed'
 },
   class Canvas extends Component {
     /**
@@ -61,17 +61,17 @@ export default connect({
       const texture = PIXI.Texture.fromImage('sun.png')
 
       // create a new Sprite using the texture
-      this.sum = new PIXI.Sprite(texture)
+      this.sun = new PIXI.Sprite(texture)
 
       // center the sprite's anchor point
-      this.sum.anchor.x = 0.5
-      this.sum.anchor.y = 0.5
+      this.sun.anchor.x = 0.5
+      this.sun.anchor.y = 0.5
 
       // move the sprite to the center of the screen
-      this.sum.position.x = canvasSize.width / 2
-      this.sum.position.y = canvasSize.height / 2
+      this.sun.position.x = canvasSize.width / 2
+      this.sun.position.y = canvasSize.height / 2
 
-      this.stage.addChild(this.sum)
+      this.stage.addChild(this.sun)
 
       // start animating
       this.animate()
@@ -108,7 +108,7 @@ export default connect({
      **/
     animate () {
       // just for fun, let's rotate mr rabbit a little
-      this.sum.rotation += this.props.rotationSpeed
+      this.sun.rotation += this.props.rotationSpeed
 
       // render the stage container
       this.renderer.render(this.stage)

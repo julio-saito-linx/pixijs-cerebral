@@ -6,6 +6,20 @@
   align-items: center;
 }
 
+.bodyContent {
+  flex: 1;
+  flex-direction: row;
+}
+
+.canvasContainer {
+
+}
+
+.controlsContainer {
+
+}
+
+
 input[type=range] {
   -webkit-appearance: none;
   margin: 10px 0;

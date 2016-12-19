@@ -4,9 +4,9 @@ import Canvas from '../Canvas'
 import './styles.css'
 
 export default connect({
-  rotationSpeed: 'sunRotation.rotationSpeed'
+  rotationSpeed: 'sunRotationModule.rotationSpeed'
 }, {
-  rotationSpeedChanged: 'sunRotation.rotationSpeedChanged'
+  rotationSpeedChanged: 'sunRotationModule.rotationSpeedChanged'
 },
   function SunRotation (props) {
     return (
@@ -14,16 +14,27 @@ export default connect({
         <h2>
           01 - Sun rotation
         </h2>
-        <input
-          id='test'
-          type='range'
-          min='-0.80'
-          max='0.80'
-          step='0.01'
-          value={props.rotationSpeed}
-          onChange={(e) => props.rotationSpeedChanged({speed: Number(e.target.value)})}
-        />
-        <Canvas zoomLevel={1} />
+        <div className='bodyContent'>
+          <div className='canvasContainer'>
+            <Canvas zoomLevel={1} />
+          </div>
+          <div className='controlsContainer'>
+            <div className='inputContainer'>
+              <label htmlFor='test'>
+                Speed:
+              </label>
+              <input
+                id='test'
+                type='range'
+                min='-0.80'
+                max='0.80'
+                step='0.01'
+                value={props.rotationSpeed}
+                onChange={(e) => props.rotationSpeedChanged({speed: Number(e.target.value)})}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

@@ -1,10 +1,12 @@
 import React from 'react'
 import {connect} from 'cerebral/react'
 import SunRotation from '../SunRotation'
+import Home from '../Home'
 import './styles.css'
 
 const pages = {
-  sunRotation: SunRotation
+  sunRotation: SunRotation,
+  home: Home
 }
 
 export default connect({
