@@ -71,12 +71,17 @@ export default connect({
       ctx.sun.rotation += newSpeed
     }
 
-    render (props) {
+    render () {
       return (
         <div className='page-container'>
           <h2 className='sub-title'>
             02 - Sun rotation that stops
           </h2>
+          <p className='explanation'>
+            All animation state is internal now.
+            Pixijs receives an initialState only from cerebral.
+            Now cerebral is only a router/render for React.
+          </p>
           <div className='bodyContent'>
             <div className='controlsContainer'>
               <div className='inputContainer'>
@@ -111,7 +116,7 @@ export default connect({
                   id='acceleration'
                   type='range'
                   min='0.00'
-                  max='0.10'
+                  max='0.20'
                   step='0.01'
                   value={this.state.reverseAcceleration}
                   onChange={(e) => {

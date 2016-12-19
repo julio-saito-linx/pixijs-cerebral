@@ -37,6 +37,11 @@ export default connect({
         <h2 className='sub-title'>
           01 - Sun rotation
         </h2>
+        <p className='explanation'>
+          Some state is on cerebral state.
+          This is very good, but cerebral debugger does not like this.
+          There are too much state.
+        </p>
         <div className='bodyContent'>
           <div className='controlsContainer'>
             <div className='inputContainer'>
