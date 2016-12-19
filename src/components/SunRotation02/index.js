@@ -75,7 +75,7 @@ export default connect({
     render (props) {
       return (
         <div className='page-container'>
-          <h2>
+          <h2 className='sub-title'>
             02 - Sun rotation that stops
           </h2>
           <div className='bodyContent'>

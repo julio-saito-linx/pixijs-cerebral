@@ -11,3 +11,15 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.title {
+  margin: 5px;
+  padding: 0;
+  font-size: 16px;
+}
+
+.sub-title {
+  margin: 5px;
+  padding: 0;
+  font-size: 14px;
+}

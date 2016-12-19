@@ -19,7 +19,11 @@ export default connect({
     const Page = pages[props.currentPage]
     return (
       <div className='container'>
-        <h1>{props.title}</h1>
+        <h1 className='title'>
+          <a href='/'>
+            {props.title}
+          </a>
+        </h1>
 
         {pages[props.currentPage] && (
           <Page />

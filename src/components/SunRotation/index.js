@@ -34,17 +34,10 @@ export default connect({
 
     return (
       <div className='page-container'>
-        <h2>
+        <h2 className='sub-title'>
           01 - Sun rotation
         </h2>
         <div className='bodyContent'>
-          <div className='canvasContainer'>
-            <Canvas
-              zoomLevel={1}
-              onStart={_onStart}
-              onAnimate={_onAnimate}
-            />
-          </div>
           <div className='controlsContainer'>
             <div className='inputContainer'>
               <label htmlFor='test'>
@@ -63,6 +56,13 @@ export default connect({
                 onChange={(e) => props.rotationSpeedChanged({speed: Number(e.target.value)})}
               />
             </div>
+          </div>
+          <div className='canvasContainer'>
+            <Canvas
+              zoomLevel={1}
+              onStart={_onStart}
+              onAnimate={_onAnimate}
+            />
           </div>
         </div>
       </div>
