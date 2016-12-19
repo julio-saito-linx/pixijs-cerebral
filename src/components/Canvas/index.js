@@ -57,21 +57,11 @@ export default connect({
       // create the root of the scene graph
       this.stage = new PIXI.Container()
 
-      // create a texture from an image path
-      const texture = PIXI.Texture.fromImage('sun.png')
-
-      // create a new Sprite using the texture
-      this.sun = new PIXI.Sprite(texture)
-
-      // center the sprite's anchor point
-      this.sun.anchor.x = 0.5
-      this.sun.anchor.y = 0.5
-
-      // move the sprite to the center of the screen
-      this.sun.position.x = canvasSize.width / 2
-      this.sun.position.y = canvasSize.height / 2
-
-      this.stage.addChild(this.sun)
+      this.props.onStart({
+        ctx: this,
+        PIXI,
+        canvasSize
+      })
 
       // start animating
       this.animate()
@@ -107,8 +97,7 @@ export default connect({
      * Animation loop for updating Pixi Canvas
      **/
     animate () {
-      // just for fun, let's rotate mr rabbit a little
-      this.sun.rotation += this.props.rotationSpeed
+      this.props.onAnimate(this)
 
       // render the stage container
       this.renderer.render(this.stage)
