@@ -2,12 +2,14 @@ import React from 'react'
 import {connect} from 'cerebral/react'
 import SunRotation from '../SunRotation'
 import SunRotation02 from '../SunRotation02'
+import Graphics01 from '../Graphics01'
 import Home from '../Home'
 import './styles.css'
 
 const pages = {
   sunRotation: SunRotation,
   sunRotation02: SunRotation02,
+  graphics01: Graphics01,
   home: Home
 }
 

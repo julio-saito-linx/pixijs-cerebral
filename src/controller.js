@@ -4,6 +4,7 @@ import Router from 'cerebral-router'
 import { set, state } from 'cerebral/operators'
 import sunRotationModule from './modules/sunRotationModule'
 import sunRotation02Module from './modules/sunRotation02Module'
+import graphics01Module from './modules/graphics01Module'
 import homeModule from './modules/homeModule'
 
 export default Controller({
@@ -33,6 +34,7 @@ export default Controller({
       '/': 'routed',
       '/sunRotation': 'sunRotationModule.routed',
       '/sunRotation02': 'sunRotation02Module.routed',
+      '/graphics01': 'graphics01Module.routed',
       '/home': 'homeModule.routed'
     },
     query: false, // Query support
@@ -51,6 +53,7 @@ export default Controller({
   modules: {
     sunRotationModule,
     sunRotation02Module,
+    graphics01Module,
     homeModule
   }
 

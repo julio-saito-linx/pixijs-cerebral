@@ -28,6 +28,15 @@ export default connect({
       // bind our zoom function
       this.updateZoomLevel = this.updateZoomLevel.bind(this)
       this.isPlaying = false
+      this.stage = null
+      this.clientSize = {
+        width: 0,
+        height: 0
+      }
+      this.canvasSize = {
+        width: 0,
+        height: 0
+      }
     }
 
     /**
@@ -35,7 +44,7 @@ export default connect({
      * and hook up the PixiJS renderer
      **/
     componentDidMount () {
-      const clientSize = {
+      this.clientSize = {
         width: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
         height: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
       }
@@ -45,13 +54,13 @@ export default connect({
       let yBottonInputRange = position.y + 23
 
       const MARGIN = 20
-      const canvasSize = {
-        width: clientSize.width - MARGIN * 2,
-        height: (clientSize.height - yBottonInputRange) - MARGIN * 2
+      this.canvasSize = {
+        width: this.props.width || this.clientSize.width - MARGIN * 2,
+        height: this.props.height || (this.clientSize.height - yBottonInputRange) - MARGIN * 5
       }
 
-      this.renderer = PIXI.autoDetectRenderer(canvasSize.width, canvasSize.height, {
-        backgroundColor: 0xcccccc
+      this.renderer = PIXI.autoDetectRenderer(this.canvasSize.width, this.canvasSize.height, {
+        backgroundColor: this.props.backgroundColor || 0xcccccc
       })
       this.refs.gameCanvas.appendChild(this.renderer.view)
 
@@ -60,8 +69,7 @@ export default connect({
 
       this.props.onStart({
         ctx: this,
-        PIXI,
-        canvasSize
+        PIXI
       })
 
       // start animating

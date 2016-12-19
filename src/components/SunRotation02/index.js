@@ -23,7 +23,7 @@ export default connect({
       })
     }
 
-    _onStart ({ctx, PIXI, canvasSize}) {
+    _onStart ({ctx, PIXI}) {
       // create a texture from an image path
       const texture = PIXI.Texture.fromImage('sun.png')
 
@@ -35,8 +35,8 @@ export default connect({
       ctx.sun.anchor.y = 0.5
 
       // move the sprite to the center of the screen
-      ctx.sun.position.x = canvasSize.width / 2
-      ctx.sun.position.y = canvasSize.height / 2
+      ctx.sun.position.x = ctx.canvasSize.width / 2
+      ctx.sun.position.y = ctx.canvasSize.height / 2
 
       ctx.stage.addChild(ctx.sun)
 
