@@ -27,6 +27,7 @@ export default connect({
       this.animate = this.animate.bind(this)
       // bind our zoom function
       this.updateZoomLevel = this.updateZoomLevel.bind(this)
+      this.isPlaying = false
     }
 
     /**
@@ -64,7 +65,12 @@ export default connect({
       })
 
       // start animating
+      this.isPlaying = true
       this.animate()
+    }
+
+    componentWillUnmount () {
+      this.isPlaying = false
     }
 
     /**
@@ -97,6 +103,10 @@ export default connect({
      * Animation loop for updating Pixi Canvas
      **/
     animate () {
+      if (this.isPlaying === false) {
+        return
+      }
+
       this.props.onAnimate(this)
 
       // render the stage container

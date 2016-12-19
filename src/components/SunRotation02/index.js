@@ -10,7 +10,6 @@ export default connect({
     constructor (props) {
       super(props)
       this.state = Object.assign({}, this.props.initialValues)
-      console.log(this.state)
     }
 
     _onSunMouseDown (ctx, mouseData) {
