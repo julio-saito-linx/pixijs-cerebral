@@ -50,11 +50,14 @@ export default connect({
               <label htmlFor='test'>
                 Speed:
               </label>
+              <span>
+                {props.rotationSpeed}
+              </span>
               <input
                 id='test'
                 type='range'
-                min='-0.80'
-                max='0.80'
+                min='-0.40'
+                max='0.40'
                 step='0.01'
                 value={props.rotationSpeed}
                 onChange={(e) => props.rotationSpeedChanged({speed: Number(e.target.value)})}
