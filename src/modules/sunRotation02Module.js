@@ -4,6 +4,7 @@ export default {
   state: {
     rotationSpeed: -0.20,
     reverseAcceleration: 0.05,
+    MAX_SPEED: 0.40,
     playing: false
   },
   signals: {

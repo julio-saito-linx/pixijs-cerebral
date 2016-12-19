@@ -4,12 +4,13 @@ import Canvas from '../Canvas'
 import './styles.css'
 
 export default connect({
-  rotationSpeed: 'sunRotation02Module.rotationSpeed',
-  reverseAcceleration: 'sunRotation02Module.reverseAcceleration'
-}, {
-  rotationSpeedChanged: 'sunRotation02Module.rotationSpeedChanged',
-  reverseAccelerationChanged: 'sunRotation02Module.reverseAccelerationChanged'
-},
+    rotationSpeed: 'sunRotation02Module.rotationSpeed',
+    reverseAcceleration: 'sunRotation02Module.reverseAcceleration',
+    MAX_SPEED: 'sunRotation02Module.MAX_SPEED'
+  }, {
+    rotationSpeedChanged: 'sunRotation02Module.rotationSpeedChanged',
+    reverseAccelerationChanged: 'sunRotation02Module.reverseAccelerationChanged'
+  },
   function SunRotation (props) {
     const _onStart = ({ctx, PIXI, canvasSize}) => {
       // create a texture from an image path
@@ -27,6 +28,19 @@ export default connect({
       ctx.sun.position.y = canvasSize.height / 2
 
       ctx.stage.addChild(ctx.sun)
+
+      function onDown (mouseData) {
+        const sunWidth = ctx.sun.width
+        const maxWidthFromCenter = sunWidth / 2
+        const localCoordsPosition = mouseData.data.getLocalPosition(ctx.sun)
+        const ratio = localCoordsPosition.x / maxWidthFromCenter
+        props.rotationSpeedChanged({speed: props.MAX_SPEED * ratio})
+      }
+
+      // mouse event
+      ctx.sun.interactive = true
+      ctx.sun.on('mousedown', onDown)
+      ctx.sun.on('touchstart', onDown)
     }
 
     const _onAnimate = (ctx) => {
@@ -52,6 +66,8 @@ export default connect({
       ctx.sun.rotation += newSpeed
     }
 
+
+    const number = -0.40
     return (
       <div className='page-container'>
         <h2>
@@ -69,8 +85,8 @@ export default connect({
               <input
                 id='test'
                 type='range'
-                min='-0.40'
-                max='0.40'
+                min={-props.MAX_SPEED}
+                max={props.MAX_SPEED}
                 step='0.01'
                 value={props.rotationSpeed}
                 onChange={(e) => props.rotationSpeedChanged({speed: Number(e.target.value)})}
