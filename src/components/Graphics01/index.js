@@ -110,12 +110,15 @@ export default connect({
               <Canvas
                 zoomLevel={1}
                 backgroundColor={0x333333}
-                width={600}
-                height={600}
                 onStart={(ctx) => this._onStart(ctx)}
                 onAnimate={(ctx) => this._onAnimate(ctx)}
               />
             </div>
+            <input
+              type='text'
+              value={JSON.stringify(this.state.allItemsColors)}
+              onChange={() => {}}
+            />
           </div>
         </div>
       )

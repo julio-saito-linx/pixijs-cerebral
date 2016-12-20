@@ -11,13 +11,17 @@ export default connect({
     constructor (props) {
       super(props)
       this.state = Object.assign({
+        isPlaying: false,
         mustRedrawGrid: false
       }, this.props.initialValues)
     }
 
-    _drawGrid (ctx) {
+    _drawGrid () {
+      const ctx = this.state.ctx
+      ctx.stage = new PIXI.Container()
       const squareSize = ctx.canvasSize.width / this.state.gridSize
       this._renderSquaresAllCanvas(ctx, squareSize)
+      this.setState({isPlaying: true})
     }
 
     _renderSquaresAllCanvas (ctx, size) {
@@ -48,7 +52,9 @@ export default connect({
       square.moveTo(...initial)
 
       // get color colIndex
-      const colorIndex = this.state.allItemsColors[rowIndex][colIndex]
+      const maxRows = this.state.allItemsColors.length
+      const maxColumns = this.state.allItemsColors[0].length
+      const colorIndex = this.state.allItemsColors[rowIndex % maxRows][colIndex % maxColumns]
       const currentFillColor = this.state.colors[colorIndex % this.state.colors.length]
       square.beginFill(currentFillColor)
       square.lineTo(final[0], initial[1])
@@ -59,14 +65,14 @@ export default connect({
 
       // mouse event
       square.interactive = true
-      square.on('mousedown', (mouseData) => this._onSquarePressed(ctx, rowIndex, colIndex))
-      square.on('touchstart', (mouseData) => this._onSquarePressed(ctx, rowIndex, colIndex))
+      square.on('mousedown', (mouseData) => this._onSquarePressed(ctx, rowIndex % maxRows, colIndex % maxColumns))
+      square.on('touchstart', (mouseData) => this._onSquarePressed(ctx, rowIndex % maxRows, colIndex % maxColumns))
 
       ctx.stage.addChild(square)
     }
 
     _onStart ({ctx}) {
-      ctx.stage = new PIXI.Container()
+      this.setState({ctx})
 
       // new Array, one color for each item
       const allItemsColors = new Array(this.state.gridSize)
@@ -92,7 +98,7 @@ export default connect({
       const allItemsColors = this.state.allItemsColors
       allItemsColors[rowIndex][colIndex] += 1
       this.setState({allItemsColors})
-      // ctx.stage.destroy()
+      ctx.stage.destroy()
       this._drawGrid(ctx)
     }
 
@@ -100,11 +106,8 @@ export default connect({
       return (
         <div className='page-container'>
           <h2 className='sub-title'>
-            01 - Graphics example
+            02 - Grid
           </h2>
-          <p className='explanation'>
-            grid
-          </p>
           <div className='controlsContainer'>
             <div className='inputContainer'>
               <label htmlFor='gridSize'>
@@ -116,8 +119,8 @@ export default connect({
               <input
                 id='gridSize'
                 type='range'
-                min={1}
-                max={100}
+                min={this.state.colors.length}
+                max={this.state.colors.length * 3}
                 step='1'
                 value={this.state.gridSize}
                 onChange={(e) => {
@@ -134,13 +137,21 @@ export default connect({
               <Canvas
                 zoomLevel={1}
                 backgroundColor={0x333333}
-                width={600}
-                height={600}
+                isPlaying={this.state.isPlaying}
                 onStart={(ctx) => this._onStart(ctx)}
                 onAnimate={(ctx) => this._onAnimate(ctx)}
               />
             </div>
           </div>
+          <input
+            type='text'
+            value={JSON.stringify(this.state.allItemsColors)}
+            onChange={(e) => {
+              this.setState({allItemsColors: JSON.parse(e.target.value)}, () => {
+                this._drawGrid()
+              })
+            }}
+          />
         </div>
       )
     }

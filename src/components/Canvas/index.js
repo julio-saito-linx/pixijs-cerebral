@@ -5,7 +5,6 @@ import {connect} from 'cerebral/react'
 // noinspection JSFileReferences
 import * as PIXI from 'pixi.js'
 import './styles.css'
-import * as util from './util'
 
 export default connect({
   rotationSpeed: 'sunRotationModule.rotationSpeed'
@@ -27,7 +26,7 @@ export default connect({
       this.animate = this.animate.bind(this)
       // bind our zoom function
       this.updateZoomLevel = this.updateZoomLevel.bind(this)
-      this.isPlaying = false
+      this.isPlaying = this.props.isPlaying || true
       this.stage = null
       this.clientSize = {
         width: 0,
@@ -49,14 +48,10 @@ export default connect({
         height: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
       }
 
-      // get input[range] position
-      let position = util.getPosition(document.querySelector('input[type="range"]'))
-      let yBottonInputRange = position.y + 23
-
       const MARGIN = 20
       this.canvasSize = {
         width: this.props.width || this.clientSize.width - MARGIN * 2,
-        height: this.props.height || (this.clientSize.height - yBottonInputRange) - MARGIN * 5
+        height: this.props.height || this.clientSize.width - MARGIN * 2
       }
 
       this.renderer = PIXI.autoDetectRenderer(this.canvasSize.width, this.canvasSize.height, {
@@ -69,7 +64,6 @@ export default connect({
       })
 
       // start animating
-      this.isPlaying = true
       this.animate()
     }
 
@@ -93,21 +87,27 @@ export default connect({
      **/
     componentWillReceiveProps (nextProps) {
       this.updateZoomLevel(nextProps)
+      if (nextProps.isPlaying === true) {
+        this.isPlaying = nextProps.isPlaying
+        this.animate()
+      }
     }
 
     /**
      * Update the stage "zoom" level by setting the scale
      **/
     updateZoomLevel (props) {
-      this.stage.scale.x = props.zoomLevel
-      this.stage.scale.y = props.zoomLevel
+      if (this.stage) {
+        this.stage.scale.x = props.zoomLevel
+        this.stage.scale.y = props.zoomLevel
+      }
     }
 
     /**
      * Animation loop for updating Pixi Canvas
      **/
     animate () {
-      if (this.isPlaying === false) {
+      if (this.isPlaying === false || !this.stage) {
         return
       }
 
