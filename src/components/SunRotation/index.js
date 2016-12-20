@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'cerebral/react'
 import Canvas from '../Canvas'
+import * as PIXI from 'pixi.js'
 import './styles.css'
 
 export default connect({
@@ -9,7 +10,8 @@ export default connect({
   rotationSpeedChanged: 'sunRotationModule.rotationSpeedChanged'
 },
   function SunRotation (props) {
-    const _onStart = ({ctx, PIXI}) => {
+    const _onStart = ({ctx}) => {
+      ctx.stage = new PIXI.Container()
       // create a texture from an image path
       const texture = PIXI.Texture.fromImage('sun.png')
 

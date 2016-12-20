@@ -57,6 +57,7 @@ export default connect({
     }
 
     _onStart ({ctx}) {
+      ctx.stage = new PIXI.Container()
       this._drawGrid(ctx)
       window.ctx = ctx
     }

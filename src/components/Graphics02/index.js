@@ -16,16 +16,19 @@ export default connect({
     }
 
     _drawGrid (ctx) {
-      ctx.myGraphics = new PIXI.Graphics()
-
-      // set a fill and line style
-      ctx.myGraphics.lineStyle(1, 0x6666ee, 1)
-
-      // draw a shape
+      // create the root of the scene graph
+      ctx.stage = new PIXI.Container()
       const squareSize = ctx.canvasSize.width / this.state.gridSize
       this._renderSquaresAllCanvas(ctx, squareSize)
-      // window.ctx = ctx
-      ctx.stage.addChild(ctx.myGraphics)
+
+      // // mouse event
+      // ctx.stage.interactive = true
+      // ctx.stage.on('mousedown', (mouseData) => this._onSunMouseDown(ctx, mouseData))
+      // ctx.stage.on('touchstart', (mouseData) => this._onSunMouseDown(ctx, mouseData))
+    }
+
+    _onSunMouseDown (ctx, mouseData) {
+      console.log(`--mouseData.data.target.graphicsData--`); console.log(mouseData.data.target.graphicsData.map(g => g.fillColor)) // DEBUG
     }
 
     _renderSquaresAllCanvas (ctx, size) {
@@ -49,13 +52,24 @@ export default connect({
     }
 
     _drawSquare (ctx, initial, final, index) {
-      ctx.myGraphics.beginFill(this.state.colors[index % this.state.colors.length - 1])
-      ctx.myGraphics.moveTo(...initial)
-      ctx.myGraphics.lineTo(final[0], initial[1])
-      ctx.myGraphics.lineTo(...final)
-      ctx.myGraphics.lineTo(initial[0], final[1])
-      ctx.myGraphics.lineTo(...initial)
-      ctx.myGraphics.endFill()
+      const square = new PIXI.Graphics()
+      // set a fill and line style
+      square.lineStyle(1, 0x6666ee, 1)
+      // draw a shape
+      square.moveTo(...initial)
+      square.beginFill(this.state.colors[index % this.state.colors.length])
+      square.lineTo(final[0], initial[1])
+      square.lineTo(...final)
+      square.lineTo(initial[0], final[1])
+      square.lineTo(...initial)
+      square.endFill()
+
+      // mouse event
+      square.interactive = true
+      square.on('mousedown', (mouseData) => this._onSunMouseDown(ctx, mouseData))
+      square.on('touchstart', (mouseData) => this._onSunMouseDown(ctx, mouseData))
+
+      ctx.stage.addChild(square)
     }
 
     _onStart ({ctx}) {
@@ -65,7 +79,7 @@ export default connect({
 
     _onAnimate (ctx) {
       if (this.state.mustRedrawGrid) {
-        ctx.myGraphics.destroy()
+        ctx.stage.destroy()
         this._drawGrid(ctx)
         this.setState({
           mustRedrawGrid: false

@@ -64,12 +64,8 @@ export default connect({
       })
       this.refs.gameCanvas.appendChild(this.renderer.view)
 
-      // create the root of the scene graph
-      this.stage = new PIXI.Container()
-
       this.props.onStart({
-        ctx: this,
-        PIXI
+        ctx: this
       })
 
       // start animating

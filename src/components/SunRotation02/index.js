@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'cerebral/react'
 import Canvas from '../Canvas'
+import * as PIXI from 'pixi.js'
 import './styles.css'
 
 export default connect({
@@ -23,7 +24,8 @@ export default connect({
       })
     }
 
-    _onStart ({ctx, PIXI}) {
+    _onStart ({ctx}) {
+      ctx.stage = new PIXI.Container()
       // create a texture from an image path
       const texture = PIXI.Texture.fromImage('sun.png')
 
