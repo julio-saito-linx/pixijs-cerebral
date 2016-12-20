@@ -5,9 +5,9 @@ import Canvas from '../Canvas'
 import './styles.css'
 
 export default connect({
-  initialValues: 'graphics01Module.initialValues'
+  initialValues: 'graphics02Module.initialValues'
 },
-  class Graphics01 extends Component {
+  class Graphics02 extends Component {
     constructor (props) {
       super(props)
       this.state = Object.assign({
@@ -31,23 +31,25 @@ export default connect({
     _renderSquaresAllCanvas (ctx, size) {
       const maxHeight = ctx.canvasSize.height
       for (let i = 0; size * i < maxHeight; i++) {
-        this._fullRow(ctx, size, size * i)
+        this._fullRow(ctx, size, size * i, i + 1)
       }
     }
 
-    _fullRow (ctx, width, startOnHeight) {
+    _fullRow (ctx, width, startOnHeight, index) {
       const maxLength = ctx.canvasSize.width
       let startPoint = [0, startOnHeight]
       let endPoint = [width, width + startOnHeight]
+      let columnIndex = 0
       while (startPoint[0] < maxLength) {
-        this._drawSquare(ctx, startPoint, endPoint)
+        this._drawSquare(ctx, startPoint, endPoint, columnIndex)
         startPoint[0] += width
         endPoint[0] += width
+        columnIndex++
       }
     }
 
-    _drawSquare (ctx, initial, final) {
-      ctx.myGraphics.beginFill(0x333399)
+    _drawSquare (ctx, initial, final, index) {
+      ctx.myGraphics.beginFill(this.state.colors[index % this.state.colors.length - 1])
       ctx.myGraphics.moveTo(...initial)
       ctx.myGraphics.lineTo(final[0], initial[1])
       ctx.myGraphics.lineTo(...final)
