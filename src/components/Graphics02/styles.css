@@ -15,6 +15,11 @@
   margin: 10px;
 }
 
+.controlsContainer > .linkItem {
+  font-size: 24px;
+  margin: 20px;
+}
+
 .canvasContainer {
 
 }

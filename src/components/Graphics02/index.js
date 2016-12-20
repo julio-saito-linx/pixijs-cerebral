@@ -109,10 +109,10 @@ export default connect({
             02 - Grid
           </h2>
           <div className='controlsContainer'>
-            <a href='/graphics02'>
+            <a className='linkItem' href='/graphics02'>
               Edit
             </a>
-            <a href='/graphics01'>
+            <a className='linkItem' href='/graphics01'>
               View
             </a>
           </div>

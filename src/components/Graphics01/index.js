@@ -94,10 +94,10 @@ export default connect({
             01 - Graphics example
           </h2>
           <div className='controlsContainer'>
-            <a href='/graphics02'>
+            <a className='linkItem' href='/graphics02'>
               Edit
             </a>
-            <a href='/graphics01'>
+            <a className='linkItem' href='/graphics01'>
               View
             </a>
           </div>
@@ -112,8 +112,8 @@ export default connect({
               <input
                 id='gridSize'
                 type='range'
-                min={this.state.colors.length}
-                max={this.state.colors.length * 10}
+                min={this.state.colors.length * 5}
+                max={this.state.colors.length * 20}
                 step='1'
                 value={this.state.gridSize}
                 onChange={(e) => {
