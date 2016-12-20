@@ -5,7 +5,10 @@ import Canvas from '../Canvas'
 import './styles.css'
 
 export default connect({
-  initialValues: 'graphics02Module.initialValues'
+  initialValues: 'graphics02Module.initialValues',
+  allItemsColors: 'graphics02Module.allItemsColors'
+}, {
+  colorChanged: 'graphics02Module.colorChanged'
 },
   class Graphics02 extends Component {
     constructor (props) {
@@ -52,9 +55,9 @@ export default connect({
       square.moveTo(...initial)
 
       // get color colIndex
-      const maxRows = this.state.allItemsColors.length
-      const maxColumns = this.state.allItemsColors[0].length
-      const colorIndex = this.state.allItemsColors[rowIndex % maxRows][colIndex % maxColumns]
+      const maxRows = this.props.allItemsColors.length
+      const maxColumns = this.props.allItemsColors[0].length
+      const colorIndex = this.props.allItemsColors[rowIndex % maxRows][colIndex % maxColumns]
       const currentFillColor = this.state.colors[colorIndex % this.state.colors.length]
       square.beginFill(currentFillColor)
       square.lineTo(final[0], initial[1])
@@ -72,15 +75,8 @@ export default connect({
     }
 
     _onStart ({ctx}) {
-      this.setState({ctx})
-
-      // new Array, one color for each item
-      const allItemsColors = new Array(this.state.gridSize)
-        .fill(null)
-        .map(a => new Array(this.state.gridSize).fill(0))
-
-      this.setState({allItemsColors}, () => {
-        this._drawGrid(ctx)
+      this.setState({ctx}, () => {
+        this._drawGrid()
       })
     }
 
@@ -95,9 +91,13 @@ export default connect({
     }
 
     _onSquarePressed (ctx, rowIndex, colIndex) {
-      const allItemsColors = this.state.allItemsColors
-      allItemsColors[rowIndex][colIndex] += 1
-      this.setState({allItemsColors})
+      // const allItemsColors = this.props.allItemsColors
+      // allItemsColors[rowIndex][colIndex] += 1
+      // this.setState({allItemsColors})
+      this.props.colorChanged({
+        rowIndex,
+        colIndex
+      })
       ctx.stage.destroy()
       this._drawGrid(ctx)
     }
@@ -108,6 +108,14 @@ export default connect({
           <h2 className='sub-title'>
             02 - Grid
           </h2>
+          <div className='controlsContainer'>
+            <a href='/graphics02'>
+              Edit
+            </a>
+            <a href='/graphics01'>
+              View
+            </a>
+          </div>
           <div className='controlsContainer'>
             <div className='inputContainer'>
               <label htmlFor='gridSize'>
@@ -131,6 +139,20 @@ export default connect({
                 }}
               />
             </div>
+            <div className='inputContainer'>
+              <label htmlFor='gridSize'>
+                Colors pattern:
+              </label>
+              <input
+                type='text'
+                value={JSON.stringify(this.props.allItemsColors)}
+                onChange={(e) => {
+                  this.setState({allItemsColors: JSON.parse(e.target.value)}, () => {
+                    this._drawGrid()
+                  })
+                }}
+              />
+            </div>
           </div>
           <div className='bodyContent'>
             <div className='canvasContainer'>
@@ -143,15 +165,6 @@ export default connect({
               />
             </div>
           </div>
-          <input
-            type='text'
-            value={JSON.stringify(this.state.allItemsColors)}
-            onChange={(e) => {
-              this.setState({allItemsColors: JSON.parse(e.target.value)}, () => {
-                this._drawGrid()
-              })
-            }}
-          />
         </div>
       )
     }
