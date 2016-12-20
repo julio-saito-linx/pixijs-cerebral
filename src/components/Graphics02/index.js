@@ -104,9 +104,9 @@ export default connect({
 
     render () {
       return (
-        <div className='page-container'>
+        <div id='pattern-editor-container'>
           <h2 className='sub-title'>
-            02 - Grid
+            Color pattern editor
           </h2>
           <div className='controlsContainer'>
             <a className='linkItem' href='/graphics02'>
@@ -139,20 +139,7 @@ export default connect({
                 }}
               />
             </div>
-            <div className='inputContainer'>
-              <label htmlFor='gridSize'>
-                Colors pattern:
-              </label>
-              <input
-                type='text'
-                value={JSON.stringify(this.props.allItemsColors)}
-                onChange={(e) => {
-                  this.setState({allItemsColors: JSON.parse(e.target.value)}, () => {
-                    this._drawGrid()
-                  })
-                }}
-              />
-            </div>
+
           </div>
           <div className='bodyContent'>
             <div className='canvasContainer'>
@@ -164,6 +151,21 @@ export default connect({
                 onAnimate={(ctx) => this._onAnimate(ctx)}
               />
             </div>
+          </div>
+
+          <div className='inputContainer'>
+            <label htmlFor='gridSize'>
+              Colors pattern:
+            </label>
+            <input
+              type='text'
+              value={JSON.stringify(this.props.allItemsColors)}
+              onChange={(e) => {
+                this.setState({allItemsColors: JSON.parse(e.target.value)}, () => {
+                  this._drawGrid()
+                })
+              }}
+            />
           </div>
         </div>
       )

@@ -25,7 +25,7 @@ export default connect({
       <div className='container'>
         <h1 className='title'>
           <a href='/'>
-            {props.title}
+            px-cer
           </a>
         </h1>
 

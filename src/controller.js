@@ -1,7 +1,7 @@
 import {Controller} from 'cerebral'
 import Devtools from 'cerebral/devtools'
 import Router from 'cerebral-router'
-import { set, state } from 'cerebral/operators'
+import {set, state} from 'cerebral/operators'
 import sunRotationModule from './modules/sunRotationModule'
 import sunRotation02Module from './modules/sunRotation02Module'
 import graphics01Module from './modules/graphics01Module'
@@ -26,23 +26,8 @@ export default Controller({
 
   // Defines the top level state
   state: {
-    currentPage: 'home',
-    title: 'Pixi.js + Cerebral.js'
+    currentPage: 'home'
   },
-
-  router: Router({
-    routes: {
-      '/': 'routed',
-      '/sunRotation': 'sunRotationModule.routed',
-      '/sunRotation02': 'sunRotation02Module.routed',
-      '/graphics01': 'graphics01Module.routed',
-      '/graphics02': 'graphics02Module.routed',
-      '/home': 'homeModule.routed'
-    },
-    query: false, // Query support
-    onlyHash: false, // Use hash urls
-    baseUrl: '' // Only handle url changes on nested path
-  }),
 
   // Defines the top level signals
   signals: {
@@ -57,7 +42,38 @@ export default Controller({
     sunRotation02Module,
     graphics01Module,
     graphics02Module,
-    homeModule
+    homeModule,
+
+    router: Router({
+      onlyHash: false,
+      filterFalsy: true,
+      routes: [
+        {
+          path: '/',
+          signal: 'routed'
+        },
+        {
+          path: '/sunRotation',
+          signal: 'sunRotationModule.routed'
+        },
+        {
+          path: '/sunRotation02',
+          signal: 'sunRotation02Module.routed'
+        },
+        {
+          path: '/graphics01',
+          signal: 'graphics01Module.routed'
+        },
+        {
+          path: '/graphics02',
+          signal: 'graphics02Module.routed'
+        },
+        {
+          path: '/home',
+          signal: 'homeModule.routed'
+        }
+      ]
+    })
   }
 
 })

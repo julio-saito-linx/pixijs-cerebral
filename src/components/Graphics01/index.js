@@ -89,9 +89,9 @@ export default connect({
 
     render () {
       return (
-        <div className='page-container'>
+        <div id='pattern-viewer-container'>
           <h2 className='sub-title'>
-            01 - Graphics example
+            Color pattern viewer
           </h2>
           <div className='controlsContainer'>
             <a className='linkItem' href='/graphics02'>
@@ -122,15 +122,6 @@ export default connect({
                     mustRedrawGrid: true
                   })
                 }}
-              />
-            </div>
-            <div className='inputContainer'>
-              <label htmlFor='gridSize'>
-                Colors pattern:
-              </label>
-              <input
-                type='text'
-                value={JSON.stringify(this.props.allItemsColors)}
               />
             </div>
           </div>

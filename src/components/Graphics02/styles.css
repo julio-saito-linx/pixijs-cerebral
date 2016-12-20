@@ -1,4 +1,4 @@
-.page-container {
+#pattern-editor-container {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -6,21 +6,21 @@
   align-items: center;
 }
 
-.bodyContent {
+#pattern-editor-container > .bodyContent {
   flex: 1;
   flex-direction: row;
 }
 
-.inputContainer {
+#pattern-editor-container > .inputContainer {
   margin: 10px;
 }
 
-.controlsContainer > .linkItem {
+#pattern-editor-container > .controlsContainer > .linkItem {
   font-size: 24px;
   margin: 20px;
 }
 
-.canvasContainer {
+#pattern-editor-container > .canvasContainer {
 
 }
 

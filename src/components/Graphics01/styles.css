@@ -1,4 +1,4 @@
-.page-container {
+#pattern-viewer-container {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -6,20 +6,25 @@
   align-items: center;
 }
 
-.bodyContent {
+#pattern-viewer-container > .bodyContent {
   flex: 1;
   flex-direction: row;
 }
 
-.inputContainer {
+#pattern-viewer-container > .inputContainer {
   margin: 10px;
 }
 
-.canvasContainer {
+#pattern-viewer-container > .controlsContainer > .linkItem {
+  font-size: 24px;
+  margin: 20px;
+}
+
+#pattern-viewer-container > .canvasContainer {
 
 }
 
-.controlsContainer {
+#pattern-viewer-container > .controlsContainer {
 
 }
 
