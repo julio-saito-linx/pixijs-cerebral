@@ -49,28 +49,12 @@ export default Controller({
       filterFalsy: true,
       routes: [
         {
-          path: '/',
-          signal: 'routed'
-        },
-        {
-          path: '/sunRotation',
-          signal: 'sunRotationModule.routed'
-        },
-        {
-          path: '/sunRotation02',
-          signal: 'sunRotation02Module.routed'
-        },
-        {
-          path: '/graphics01',
-          signal: 'graphics01Module.routed'
-        },
-        {
-          path: '/graphics02',
-          signal: 'graphics02Module.routed'
-        },
-        {
-          path: '/home',
-          signal: 'homeModule.routed'
+          path: '/:page?',
+          map: {
+            page: state`currentPage`,
+            colors: state`graphics02Module.initialValues.urlColors`,
+            pattern: state`graphics02Module.patterns`
+          }
         }
       ]
     })

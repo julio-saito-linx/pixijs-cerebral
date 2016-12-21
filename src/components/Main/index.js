@@ -12,7 +12,7 @@ const pages = {
   sunRotation02: SunRotation02,
   graphics01: Graphics01,
   graphics02: Graphics02,
-  home: Home
+  null: Home
 }
 
 export default connect({

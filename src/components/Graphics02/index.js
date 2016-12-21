@@ -4,19 +4,37 @@ import * as PIXI from 'pixi.js'
 import Canvas from '../Canvas'
 import './styles.css'
 
-export default connect({
-  initialValues: 'graphics02Module.initialValues',
-  allItemsColors: 'graphics02Module.allItemsColors'
-}, {
-  colorChanged: 'graphics02Module.colorChanged'
-},
+export default connect(
+  {
+    initialValues: 'graphics02Module.initialValues',
+    colors: 'graphics02Module.colors',
+    allItemsColors: 'graphics02Module.allItemsColors',
+    isLoading: 'graphics02Module.isLoading'
+  },
+  {
+    started: 'graphics02Module.started',
+    colorChanged: 'graphics02Module.colorChanged'
+  },
   class Graphics02 extends Component {
     constructor (props) {
       super(props)
-      this.state = Object.assign({
-        isPlaying: false,
-        mustRedrawGrid: false
-      }, this.props.initialValues)
+      this.state = Object.assign(
+        {
+          isPlaying: false,
+          mustRedrawGrid: false
+        },
+        this.props.initialValues,
+      )
+    }
+
+    componentDidMount () {
+      this.props.started()
+    }
+
+    componentWillReceiveProps (nextProps) {
+      if (nextProps.colors !== this.props.colors) {
+        this.setState({colors: nextProps.colors})
+      }
     }
 
     _drawGrid () {
@@ -103,6 +121,11 @@ export default connect({
     }
 
     render () {
+      if (this.props.isLoading ||
+          !this.state.colors) {
+        return null
+      }
+
       return (
         <div id='pattern-editor-container'>
           <h2 className='sub-title'>
