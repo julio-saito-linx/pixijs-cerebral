@@ -15,7 +15,12 @@
   margin: 10px;
 }
 
+#pattern-viewer-container label, #pattern-viewer-container span {
+  color: cornsilk;
+}
+
 #pattern-viewer-container > .controlsContainer > .linkItem {
+  color: cornsilk;
   font-size: 24px;
   margin: 20px;
 }

@@ -125,45 +125,12 @@ export default connect(
 
     render () {
       if (this.props.isLoading ||
-          typeof this.state.colors === 'undefined') {
+        typeof this.state.colors === 'undefined') {
         return null
       }
 
       return (
         <div id='pattern-editor-container'>
-          <div className='controlsContainer'>
-            <a className='linkItem' href='/colorPatternEdit'>
-              Edit
-            </a>
-            <a className='linkItem' href='/colorPatternView'>
-              View
-            </a>
-          </div>
-          <div className='controlsContainer'>
-            <div className='inputContainer'>
-              <label htmlFor='gridSize'>
-                Grid size:
-              </label>
-              <span>
-                {this.state.gridSize}
-              </span>
-              <input
-                id='gridSize'
-                type='range'
-                min={this.state.colors.length}
-                max={this.state.colors.length * 3}
-                step='1'
-                value={this.state.gridSize}
-                onChange={(e) => {
-                  this.setState({
-                    gridSize: Number(e.target.value),
-                    mustRedrawGrid: true
-                  })
-                }}
-              />
-            </div>
-
-          </div>
           <div className='bodyContent'>
             <div className='canvasContainer'>
               <Canvas
@@ -174,6 +141,41 @@ export default connect(
                 onAnimate={(ctx) => this._onAnimate(ctx)}
               />
             </div>
+
+            <div className='controlsContainer'>
+              <div className='inputContainer'>
+                <label htmlFor='gridSize'>
+                  Grid size:
+                </label>
+                <span>
+                  {this.state.gridSize}
+                </span>
+                <input
+                  id='gridSize'
+                  type='range'
+                  min={this.state.colors.length}
+                  max={this.state.colors.length * 3}
+                  step='1'
+                  value={this.state.gridSize}
+                  onChange={(e) => {
+                    this.setState({
+                      gridSize: Number(e.target.value),
+                      mustRedrawGrid: true
+                    })
+                  }}
+                />
+              </div>
+
+            </div>
+          </div>
+
+          <div className='controlsContainer'>
+            <a className='linkItem' href='/colorPatternEdit'>
+              Edit
+            </a>
+            <a className='linkItem' href='/colorPatternView'>
+              View
+            </a>
           </div>
         </div>
       )

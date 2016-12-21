@@ -87,44 +87,17 @@ export default connect({
         this.setState({
           mustRedrawGrid: false
         })
+      } else {
+        if (ctx.stage) {
+          ctx.stage.scale.x = this.state.zoomLevel
+          ctx.stage.scale.y = this.state.zoomLevel
+        }
       }
     }
 
     render () {
       return (
         <div id='pattern-viewer-container'>
-          <div className='controlsContainer'>
-            <a className='linkItem' href='/colorPatternEdit'>
-              Edit
-            </a>
-            <a className='linkItem' href='/colorPatternView'>
-              View
-            </a>
-          </div>
-          <div className='controlsContainer'>
-            <div className='inputContainer'>
-              <label htmlFor='gridSize'>
-                Grid size:
-              </label>
-              <span>
-                {this.state.gridSize}
-              </span>
-              <input
-                id='gridSize'
-                type='range'
-                min={this.props.colors.length * 5}
-                max={this.props.colors.length * 20}
-                step='1'
-                value={this.state.gridSize}
-                onChange={(e) => {
-                  this.setState({
-                    gridSize: Number(e.target.value),
-                    mustRedrawGrid: true
-                  })
-                }}
-              />
-            </div>
-          </div>
           <div className='bodyContent'>
             <div className='canvasContainer'>
               <Canvas
@@ -135,7 +108,63 @@ export default connect({
                 onAnimate={(ctx) => this._onAnimate(ctx)}
               />
             </div>
+
+            <div className='controlsContainer'>
+              <div className='inputContainer'>
+                <label htmlFor='gridSize'>
+                  Grid size:
+                </label>
+                <span>
+                  {this.state.gridSize}
+                </span>
+                <input
+                  id='gridSize'
+                  type='range'
+                  min={this.props.colors.length * 5}
+                  max={this.props.colors.length * 20}
+                  step='1'
+                  value={this.state.gridSize}
+                  onChange={(e) => {
+                    this.setState({
+                      gridSize: Number(e.target.value),
+                      mustRedrawGrid: true
+                    })
+                  }}
+                />
+              </div>
+              <div className='inputContainer'>
+                <label htmlFor='gridSize'>
+                  Zoom level:
+                </label>
+                <span>
+                  {this.state.zoomLevel}
+                </span>
+                <input
+                  id='zoomLevel'
+                  type='range'
+                  min={1}
+                  max={10}
+                  step={1}
+                  value={this.state.zoomLevel}
+                  onChange={(e) => {
+                    this.setState({
+                      zoomLevel: Number(e.target.value),
+                      mustRedrawGrid: false
+                    })
+                  }}
+                />
+              </div>
+            </div>
           </div>
+          <div className='controlsContainer'>
+            <a className='linkItem' href='/colorPatternEdit'>
+              Edit
+            </a>
+            <a className='linkItem' href='/colorPatternView'>
+              View
+            </a>
+          </div>
+
         </div>
       )
     }

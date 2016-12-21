@@ -107,15 +107,13 @@ export default connect({
      * Animation loop for updating Pixi Canvas
      **/
     animate () {
-      if (this.isPlaying === false || !this.stage) {
-        return
-      }
-
+      // if (this.isPlaying === false || !this.stage) {
+      //   return
+      // }
       this.props.onAnimate(this)
-
       // render the stage container
-      this.renderer.render(this.stage)
-      this.frame = requestAnimationFrame(this.animate)
+      this.stage && this.renderer.render(this.stage)
+      requestAnimationFrame(this.animate)
     }
 
     /**
