@@ -13,8 +13,14 @@ const createEmptyGrid = ({state}) => {
 
 const setColors = ({state}) => {
   // generate colors from url
+  const currentColors = state.get('graphics02Module.colors')
   const urlColorsString = state.get('graphics02Module.initialValues.urlColors')
   const initialColors = state.get('graphics02Module.initialValues.initialColors')
+
+  if (currentColors.length > 0 && !urlColorsString) {
+    return
+  }
+
   let parsedColors = urlColorsString || initialColors
   parsedColors = parsedColors
     .split(',')

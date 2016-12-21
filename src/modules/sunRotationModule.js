@@ -5,9 +5,6 @@ export default {
     rotationSpeed: 0.05
   },
   signals: {
-    routed: [
-      set(state`currentPage`, 'sunRotation')
-    ],
     rotationSpeedChanged: [
       set(state`sunRotationModule.rotationSpeed`, input`speed`)
     ]

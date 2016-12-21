@@ -24,6 +24,9 @@ export default connect(
           mustRedrawGrid: false
         },
         this.props.initialValues,
+        {
+          colors: this.props.colors
+        }
       )
     }
 
@@ -122,7 +125,7 @@ export default connect(
 
     render () {
       if (this.props.isLoading ||
-          !this.state.colors) {
+          typeof this.state.colors === 'undefined') {
         return null
       }
 

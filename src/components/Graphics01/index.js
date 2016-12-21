@@ -6,7 +6,8 @@ import './styles.css'
 
 export default connect({
   initialValues: 'graphics01Module.initialValues',
-  allItemsColors: 'graphics02Module.allItemsColors'
+  allItemsColors: 'graphics02Module.allItemsColors',
+  colors: 'graphics02Module.colors'
 },
   class Graphics01 extends Component {
     constructor (props) {
@@ -59,7 +60,7 @@ export default connect({
       const maxRows = this.props.allItemsColors.length
       const maxColumns = this.props.allItemsColors[0].length
       const colorIndex = this.props.allItemsColors[rowIndex % maxRows][colIndex % maxColumns]
-      const currentFillColor = this.state.colors[colorIndex % this.state.colors.length]
+      const currentFillColor = this.props.colors[colorIndex % this.props.colors.length]
       ctx.myGraphics.beginFill(currentFillColor)
       // ctx.myGraphics.beginFill(0x333399)
       ctx.myGraphics.moveTo(...initial)
@@ -114,8 +115,8 @@ export default connect({
               <input
                 id='gridSize'
                 type='range'
-                min={this.state.colors.length * 5}
-                max={this.state.colors.length * 20}
+                min={this.props.colors.length * 5}
+                max={this.props.colors.length * 20}
                 step='1'
                 value={this.state.gridSize}
                 onChange={(e) => {

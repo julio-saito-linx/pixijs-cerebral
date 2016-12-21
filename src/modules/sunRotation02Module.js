@@ -1,5 +1,3 @@
-import { set, state } from 'cerebral/operators'
-
 export default {
   state: {
     initialValues: {
@@ -9,9 +7,5 @@ export default {
       playing: false
     }
   },
-  signals: {
-    routed: [
-      set(state`currentPage`, 'sunRotation02')
-    ]
-  }
+  signals: {}
 }
