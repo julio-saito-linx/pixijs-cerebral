@@ -38,11 +38,11 @@ export default Controller({
 
   // Defines the top level modules
   modules: {
+    homeModule,
     sunRotationModule,
     sunRotation02Module,
     graphics01Module,
     graphics02Module,
-    homeModule,
 
     router: Router({
       onlyHash: false,

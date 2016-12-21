@@ -21,12 +21,41 @@ export default () => (
     </div>
     <div className='link-item'>
       <a href='/graphics02'>
-        Color pattern editor
+        EDIT: Color pattern
       </a>
+
+      <ul>
+        <li>
+          <a href='/graphics02?colors=f5d9c3,d2acb9,b4707f,75617c,412e34'>
+            f5d9c3,d2acb9,b4707f,75617c,412e34
+          </a>
+        </li>
+        <li>
+          <a href='/graphics02?colors=0e1b2e,16314f,2a606c,4bf9f0,3a41b5'>
+            0e1b2e,16314f,2a606c,4bf9f0,3a41b5
+          </a>
+        </li>
+        <li>
+          <a href='/graphics02?colors=cec4ab,b6a780,5c4732,82260f,211346'>
+            cec4ab,b6a780,5c4732,82260f,211346
+          </a>
+        </li>
+        <li>
+          <a href='/graphics02?colors=c33823,a0cbb7,da894a,2c2421,0a080b'>
+            c33823,a0cbb7,da894a,2c2421,0a080b
+          </a>
+        </li>
+        <li>
+          <a href='/graphics02?colors=6c9483,869c80,2b2b2c,b42c22,d1c0a5'>
+            6c9483,869c80,2b2b2c,b42c22,d1c0a5
+          </a>
+        </li>
+      </ul>
+
     </div>
     <div className='link-item'>
       <a href='/graphics01'>
-        Color pattern viewer
+        VIEW: Color pattern
       </a>
     </div>
   </div>

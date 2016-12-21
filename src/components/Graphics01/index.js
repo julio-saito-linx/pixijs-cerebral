@@ -73,7 +73,9 @@ export default connect({
     _onStart ({ctx}) {
       this.setState({ctx}, () => {
         ctx.stage = new PIXI.Container()
-        this._drawGrid(ctx)
+        if (this.props.allItemsColors.length > 0) {
+          this._drawGrid(ctx)
+        }
       })
     }
 
