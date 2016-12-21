@@ -5,11 +5,11 @@ import Canvas from '../Canvas'
 import './styles.css'
 
 export default connect({
-  initialValues: 'graphics01Module.initialValues',
-  allItemsColors: 'graphics02Module.allItemsColors',
-  colors: 'graphics02Module.colors'
+  initialValues: 'colorPatternViewModule.initialValues',
+  allItemsColors: 'colorPatternEditModule.allItemsColors',
+  colors: 'colorPatternEditModule.colors'
 },
-  class Graphics01 extends Component {
+  class ColorPatternView extends Component {
     constructor (props) {
       super(props)
       this.state = Object.assign({
@@ -93,14 +93,11 @@ export default connect({
     render () {
       return (
         <div id='pattern-viewer-container'>
-          <h2 className='sub-title'>
-            Color pattern viewer
-          </h2>
           <div className='controlsContainer'>
-            <a className='linkItem' href='/graphics02'>
+            <a className='linkItem' href='/colorPatternEdit'>
               Edit
             </a>
-            <a className='linkItem' href='/graphics01'>
+            <a className='linkItem' href='/colorPatternView'>
               View
             </a>
           </div>

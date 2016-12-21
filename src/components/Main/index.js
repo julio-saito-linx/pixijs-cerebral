@@ -2,17 +2,37 @@ import React from 'react'
 import {connect} from 'cerebral/react'
 import SunRotation from '../SunRotation'
 import SunRotation02 from '../SunRotation02'
-import Graphics01 from '../Graphics01'
-import Graphics02 from '../Graphics02'
+import ColorPatternView from '../ColorPatternView'
+import ColorPatternEdit from '../ColorPatternEdit'
 import Home from '../Home'
 import './styles.css'
 
 const pages = {
-  sunRotation: SunRotation,
-  sunRotation02: SunRotation02,
-  graphics01: Graphics01,
-  graphics02: Graphics02,
-  null: Home
+  sunRotation: {
+    component: SunRotation,
+    title: 'Sun Rotation 1',
+    backgroundColor: '#fff'
+  },
+  sunRotation02: {
+    component: SunRotation02,
+    title: 'Sun Rotation 2',
+    backgroundColor: '#fff'
+  },
+  colorPatternEdit: {
+    component: ColorPatternEdit,
+    title: 'Color pattern edit',
+    backgroundColor: '#fff'
+  },
+  colorPatternView: {
+    component: ColorPatternView,
+    title: 'Color pattern view',
+    backgroundColor: '#000'
+  },
+  null: {
+    component: Home,
+    title: 'Sun Rotation',
+    backgroundColor: '#fff'
+  }
 }
 
 export default connect({
@@ -20,19 +40,20 @@ export default connect({
   title: 'title'
 },
   function App (props) {
-    const Page = pages[props.currentPage]
+    const Page = pages[props.currentPage].component
+    const title = pages[props.currentPage].title
+    const backgroundColor = pages[props.currentPage].backgroundColor
     return (
-      <div className='container'>
-        <h1 className='title'>
+      <div id='main-container' style={{backgroundColor}}>
+        <div id='top-container'>
+          <h1 className='title'>
+            {title}
+          </h1>
           <a href='/'>
             px-cer
           </a>
-        </h1>
-
-        {pages[props.currentPage] && (
-          <Page />
-        )}
-
+        </div>
+        <Page />
       </div>
     )
   }

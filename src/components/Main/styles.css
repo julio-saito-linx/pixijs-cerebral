@@ -2,13 +2,23 @@ body {
   font-family: monospace;
   font-size: 120%;
   margin: 0;
+  background-color: black;
 }
 
-.container {
+#main-container {
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+#top-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-self: flex-end;
+  justify-content: flex-end;
   align-items: center;
 }
 

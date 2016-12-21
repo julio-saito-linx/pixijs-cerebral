@@ -4,8 +4,8 @@ import Router from 'cerebral-router'
 import {set, state} from 'cerebral/operators'
 import sunRotationModule from './modules/sunRotationModule'
 import sunRotation02Module from './modules/sunRotation02Module'
-import graphics01Module from './modules/graphics01Module'
-import graphics02Module from './modules/graphics02Module'
+import colorPatternViewModule from './modules/colorPatternViewModule'
+import colorPatternEditModule from './modules/colorPatternEditModule'
 import homeModule from './modules/homeModule'
 
 export default Controller({
@@ -41,8 +41,8 @@ export default Controller({
     homeModule,
     sunRotationModule,
     sunRotation02Module,
-    graphics01Module,
-    graphics02Module,
+    colorPatternViewModule,
+    colorPatternEditModule,
 
     router: Router({
       onlyHash: false,
@@ -52,8 +52,8 @@ export default Controller({
           path: '/:page?',
           map: {
             page: state`currentPage`,
-            colors: state`graphics02Module.initialValues.urlColors`,
-            pattern: state`graphics02Module.patterns`
+            colors: state`colorPatternEditModule.initialValues.urlColors`,
+            pattern: state`colorPatternEditModule.patterns`
           }
         }
       ]

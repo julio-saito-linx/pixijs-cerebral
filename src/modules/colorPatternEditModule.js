@@ -2,20 +2,20 @@ import {set, state} from 'cerebral/operators'
 
 const createEmptyGrid = ({state}) => {
   // generate grid on state
-  const currentItems = state.get('graphics02Module.allItemsColors')
+  const currentItems = state.get('colorPatternEditModule.allItemsColors')
   if (currentItems.length === 0) {
-    const allItemsColors = new Array(state.get('graphics02Module.initialValues.gridSize'))
+    const allItemsColors = new Array(state.get('colorPatternEditModule.initialValues.gridSize'))
       .fill(null)
-      .map(a => new Array(state.get('graphics02Module.initialValues.gridSize')).fill(0))
-    state.set('graphics02Module.allItemsColors', allItemsColors)
+      .map(a => new Array(state.get('colorPatternEditModule.initialValues.gridSize')).fill(0))
+    state.set('colorPatternEditModule.allItemsColors', allItemsColors)
   }
 }
 
 const setColors = ({state}) => {
   // generate colors from url
-  const currentColors = state.get('graphics02Module.colors')
-  const urlColorsString = state.get('graphics02Module.initialValues.urlColors')
-  const initialColors = state.get('graphics02Module.initialValues.initialColors')
+  const currentColors = state.get('colorPatternEditModule.colors')
+  const urlColorsString = state.get('colorPatternEditModule.initialValues.urlColors')
+  const initialColors = state.get('colorPatternEditModule.initialValues.initialColors')
 
   if (currentColors.length > 0 && !urlColorsString) {
     return
@@ -25,19 +25,19 @@ const setColors = ({state}) => {
   parsedColors = parsedColors
     .split(',')
     .map(c => Number(`0x${c}`))
-  state.set('graphics02Module.colors', parsedColors)
+  state.set('colorPatternEditModule.colors', parsedColors)
 }
 
 const redirectWithColorQueryString = ({state, router}) => {
-  const colors = state.get('graphics02Module.colors')
+  const colors = state.get('colorPatternEditModule.colors')
   const queryStringColor = colors.map(c => c.toString(16))
-  router.redirect(`/graphics02?colors=${queryStringColor}`)
+  router.redirect(`/colorPatternEdit?colors=${queryStringColor}`)
 }
 
 const changeColorItem = ({state, input}) => {
   const rowIndex = input.rowIndex
   const colIndex = input.colIndex
-  let allItemsColors = state.get(`graphics02Module.allItemsColors`)
+  let allItemsColors = state.get(`colorPatternEditModule.allItemsColors`)
     .reduce((prev, curr, index) => {
       if (index === rowIndex) {
         prev.push(curr.reduce((prev, curr, i) => {
@@ -53,7 +53,7 @@ const changeColorItem = ({state, input}) => {
       }
       return prev
     }, [])
-  state.set(`graphics02Module.allItemsColors`, allItemsColors)
+  state.set(`colorPatternEditModule.allItemsColors`, allItemsColors)
 }
 export default {
   state: {
@@ -68,12 +68,12 @@ export default {
   },
   signals: {
     started: [
-      // set(state`currentPage`, 'graphics02'),
-      set(state`graphics02Module.isLoading`, true),
+      // set(state`currentPage`, 'colorPatternEdit'),
+      set(state`colorPatternEditModule.isLoading`, true),
       createEmptyGrid,
       setColors,
       redirectWithColorQueryString,
-      set(state`graphics02Module.isLoading`, false)
+      set(state`colorPatternEditModule.isLoading`, false)
     ],
     colorChanged: [
       changeColorItem

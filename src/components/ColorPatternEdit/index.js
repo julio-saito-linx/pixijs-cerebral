@@ -6,16 +6,16 @@ import './styles.css'
 
 export default connect(
   {
-    initialValues: 'graphics02Module.initialValues',
-    colors: 'graphics02Module.colors',
-    allItemsColors: 'graphics02Module.allItemsColors',
-    isLoading: 'graphics02Module.isLoading'
+    initialValues: 'colorPatternEditModule.initialValues',
+    colors: 'colorPatternEditModule.colors',
+    allItemsColors: 'colorPatternEditModule.allItemsColors',
+    isLoading: 'colorPatternEditModule.isLoading'
   },
   {
-    started: 'graphics02Module.started',
-    colorChanged: 'graphics02Module.colorChanged'
+    started: 'colorPatternEditModule.started',
+    colorChanged: 'colorPatternEditModule.colorChanged'
   },
-  class Graphics02 extends Component {
+  class ColorPatternEdit extends Component {
     constructor (props) {
       super(props)
       this.state = Object.assign(
@@ -131,14 +131,11 @@ export default connect(
 
       return (
         <div id='pattern-editor-container'>
-          <h2 className='sub-title'>
-            Color pattern editor
-          </h2>
           <div className='controlsContainer'>
-            <a className='linkItem' href='/graphics02'>
+            <a className='linkItem' href='/colorPatternEdit'>
               Edit
             </a>
-            <a className='linkItem' href='/graphics01'>
+            <a className='linkItem' href='/colorPatternView'>
               View
             </a>
           </div>
