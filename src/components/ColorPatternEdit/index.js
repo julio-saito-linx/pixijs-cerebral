@@ -175,21 +175,6 @@ export default connect(
               />
             </div>
           </div>
-
-          <div className='inputContainer'>
-            <label htmlFor='gridSize'>
-              Colors pattern:
-            </label>
-            <input
-              type='text'
-              value={JSON.stringify(this.props.allItemsColors)}
-              onChange={(e) => {
-                this.setState({allItemsColors: JSON.parse(e.target.value)}, () => {
-                  this._drawGrid()
-                })
-              }}
-            />
-          </div>
         </div>
       )
     }

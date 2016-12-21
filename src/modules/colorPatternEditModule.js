@@ -28,10 +28,29 @@ const setColors = ({state}) => {
   state.set('colorPatternEditModule.colors', parsedColors)
 }
 
-const redirectWithColorQueryString = ({state, router}) => {
+const setPatterns = ({state}) => {
+  // generate colors from url
+  const allItemsColors = state.get('colorPatternEditModule.allItemsColors')
+  const urlPatterns = state.get('colorPatternEditModule.initialValues.urlPatterns')
+
+  if (allItemsColors.length > 0 && !urlPatterns) {
+    return
+  }
+
+  let parsedPatterns = urlPatterns
+  parsedPatterns = parsedPatterns
+    .split('-')
+    .map(c => JSON.parse(`[${c}]`))
+
+  state.set('colorPatternEditModule.allItemsColors', parsedPatterns)
+}
+
+const redirectWithData = ({state, router}) => {
   const colors = state.get('colorPatternEditModule.colors')
+  const allItemsColors = state.get('colorPatternEditModule.allItemsColors')
   const queryStringColor = colors.map(c => c.toString(16))
-  router.redirect(`/colorPatternEdit?colors=${queryStringColor}`)
+  const queryStringAllItemsColors = allItemsColors.map(items => items.toString()).join('-')
+  router.redirect(`/colorPatternEdit?colors=${queryStringColor}&patterns=${queryStringAllItemsColors}`)
 }
 
 const changeColorItem = ({state, input}) => {
@@ -72,11 +91,13 @@ export default {
       set(state`colorPatternEditModule.isLoading`, true),
       createEmptyGrid,
       setColors,
-      redirectWithColorQueryString,
+      setPatterns,
+      redirectWithData,
       set(state`colorPatternEditModule.isLoading`, false)
     ],
     colorChanged: [
-      changeColorItem
+      changeColorItem,
+      redirectWithData
     ]
   }
 }

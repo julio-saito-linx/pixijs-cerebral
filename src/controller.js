@@ -53,7 +53,7 @@ export default Controller({
           map: {
             page: state`currentPage`,
             colors: state`colorPatternEditModule.initialValues.urlColors`,
-            pattern: state`colorPatternEditModule.patterns`
+            patterns: state`colorPatternEditModule.initialValues.urlPatterns`
           }
         }
       ]
