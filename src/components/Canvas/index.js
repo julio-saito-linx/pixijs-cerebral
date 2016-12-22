@@ -49,9 +49,12 @@ export default connect({
       }
 
       const MARGIN = 20
+      const maxWidth = this.props.width || this.clientSize.width - MARGIN * 2
+      const maxHeight = this.props.height || this.clientSize.height - MARGIN * 8
+      const maxSize = Math.min(maxWidth, maxHeight)
       this.canvasSize = {
-        width: this.props.width || this.clientSize.width - MARGIN * 2,
-        height: this.props.height || this.clientSize.width - MARGIN * 2
+        width: maxSize,
+        height: maxSize
       }
 
       this.renderer = PIXI.autoDetectRenderer(this.canvasSize.width, this.canvasSize.height, {

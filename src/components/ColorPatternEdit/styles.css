@@ -24,6 +24,13 @@
 
 }
 
+#pattern-editor-container #buttons button {
+  margin: 10px 10px 10px 0;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+}
+
 .controlsContainer {
 
 }

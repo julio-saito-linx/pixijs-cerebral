@@ -12,8 +12,13 @@ export default connect(
     isLoading: 'colorPatternEditModule.isLoading'
   },
   {
+    redirectTo: 'homeModule.redirectTo',
     started: 'colorPatternEditModule.started',
-    colorChanged: 'colorPatternEditModule.colorChanged'
+    colorChanged: 'colorPatternEditModule.colorChanged',
+    leftButtonPressed: 'colorPatternEditModule.leftButtonPressed',
+    rightButtonPressed: 'colorPatternEditModule.rightButtonPressed',
+    upButtonPressed: 'colorPatternEditModule.upButtonPressed',
+    downButtonPressed: 'colorPatternEditModule.downButtonPressed'
   },
   class ColorPatternEdit extends Component {
     constructor (props) {
@@ -32,6 +37,31 @@ export default connect(
 
     componentDidMount () {
       this.props.started()
+
+      this.keyDownListener = (e) => {
+        if (e.code === 'KeyA') {
+          this.props.leftButtonPressed()
+          this.setState({ mustRedrawGrid: true })
+        } else if (e.code === 'KeyS') {
+          this.props.downButtonPressed()
+          this.setState({ mustRedrawGrid: true })
+        } else if (e.code === 'KeyW') {
+          this.props.upButtonPressed()
+          this.setState({ mustRedrawGrid: true })
+        } else if (e.code === 'KeyD') {
+          this.props.rightButtonPressed()
+          this.setState({ mustRedrawGrid: true })
+        } else if (e.code === 'Escape') {
+          this.props.redirectTo({destination: 'colorPatternView'})
+        } else {
+          console.info(e.code)
+        }
+      }
+      window.addEventListener('keydown', this.keyDownListener)
+    }
+
+    componentWillUnmount () {
+      window.removeEventListener('keydown', this.keyDownListener)
     }
 
     componentWillReceiveProps (nextProps) {
@@ -142,7 +172,29 @@ export default connect(
               />
             </div>
 
+            <div id='buttons'>
+              <button color='#777' onClick={() => {
+                this.props.leftButtonPressed()
+                this.setState({ mustRedrawGrid: true })
+              }}>◀</button>
+              <button color='#777' onClick={() => {
+                this.props.rightButtonPressed()
+                this.setState({ mustRedrawGrid: true })
+              }}>▶</button>
+              <button color='#777' onClick={() => {
+                this.props.upButtonPressed()
+                this.setState({ mustRedrawGrid: true })
+              }}>▲</button>
+              <button color='#777' onClick={() => {
+                this.props.downButtonPressed()
+                this.setState({ mustRedrawGrid: true })
+              }}>▼</button>
+            </div>
+
             <div className='controlsContainer'>
+              <a className='linkItem' href='/colorPatternView'>
+                View
+              </a>
               <div className='inputContainer'>
                 <label htmlFor='gridSize'>
                   Grid size:
@@ -167,15 +219,6 @@ export default connect(
               </div>
 
             </div>
-          </div>
-
-          <div className='controlsContainer'>
-            <a className='linkItem' href='/colorPatternEdit'>
-              Edit
-            </a>
-            <a className='linkItem' href='/colorPatternView'>
-              View
-            </a>
           </div>
         </div>
       )

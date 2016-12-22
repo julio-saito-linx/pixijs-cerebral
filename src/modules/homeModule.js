@@ -1,4 +1,10 @@
 export default {
-  state: {
+  state: {},
+  signals: {
+    redirectTo: [
+      ({router, input}) => {
+        router.redirect(`/${input.destination}`)
+      }
+    ]
   }
 }

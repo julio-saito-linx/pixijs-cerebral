@@ -4,11 +4,15 @@ import * as PIXI from 'pixi.js'
 import Canvas from '../Canvas'
 import './styles.css'
 
-export default connect({
-  initialValues: 'colorPatternViewModule.initialValues',
-  allItemsColors: 'colorPatternEditModule.allItemsColors',
-  colors: 'colorPatternEditModule.colors'
-},
+export default connect(
+  {
+    initialValues: 'colorPatternViewModule.initialValues',
+    allItemsColors: 'colorPatternEditModule.allItemsColors',
+    colors: 'colorPatternEditModule.colors'
+  },
+  {
+    redirectTo: 'homeModule.redirectTo'
+  },
   class ColorPatternView extends Component {
     constructor (props) {
       super(props)
@@ -16,6 +20,21 @@ export default connect({
         isPlaying: false,
         mustRedrawGrid: false
       }, this.props.initialValues)
+    }
+
+    componentDidMount () {
+      this.keyDownListener = (e) => {
+        if (e.code === 'Escape') {
+          this.props.redirectTo({destination: 'colorPatternEdit'})
+        } else {
+          console.info(e.code)
+        }
+      }
+      window.addEventListener('keydown', this.keyDownListener)
+    }
+
+    componentWillUnmount () {
+      window.removeEventListener('keydown', this.keyDownListener)
     }
 
     _drawGrid () {
@@ -110,6 +129,9 @@ export default connect({
             </div>
 
             <div className='controlsContainer'>
+              <a className='linkItem' href='/colorPatternEdit'>
+                Edit
+              </a>
               <div className='inputContainer'>
                 <label htmlFor='gridSize'>
                   Grid size:
@@ -155,14 +177,6 @@ export default connect({
                 />
               </div>
             </div>
-          </div>
-          <div className='controlsContainer'>
-            <a className='linkItem' href='/colorPatternEdit'>
-              Edit
-            </a>
-            <a className='linkItem' href='/colorPatternView'>
-              View
-            </a>
           </div>
 
         </div>

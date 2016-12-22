@@ -95,8 +95,78 @@ export default {
       redirectWithData,
       set(state`colorPatternEditModule.isLoading`, false)
     ],
+
     colorChanged: [
       changeColorItem,
+      redirectWithData
+    ],
+
+    leftButtonPressed: [
+      ({state}) => {
+        const newItems = state.get(`colorPatternEditModule.allItemsColors`)
+          .reduce((rows, currRow, index) => {
+            const newRow = currRow.reduce((newItem, curr, i) => {
+              if (i + 1 > currRow.length - 1) {
+                newItem.push(currRow[0])
+              } else {
+                newItem.push(currRow[i + 1])
+              }
+              return newItem
+            }, [])
+            rows.push(newRow)
+            return rows
+          }, [])
+        state.set('colorPatternEditModule.allItemsColors', newItems)
+      },
+      redirectWithData
+    ],
+    rightButtonPressed: [
+      ({state}) => {
+        const newItems = state.get(`colorPatternEditModule.allItemsColors`)
+          .reduce((rows, currRow, index) => {
+            const newRow = currRow.reduce((newItem, curr, i) => {
+              if (i === 0) {
+                newItem.push(currRow[currRow.length - 1])
+              } else {
+                newItem.push(currRow[i - 1])
+              }
+              return newItem
+            }, [])
+            rows.push(newRow)
+            return rows
+          }, [])
+        state.set('colorPatternEditModule.allItemsColors', newItems)
+      },
+      redirectWithData
+    ],
+    upButtonPressed: [
+      ({state}) => {
+        const newItems = state.get(`colorPatternEditModule.allItemsColors`)
+          .reduce((rows, currRow, index, allArray) => {
+            if (index === allArray.length - 1) {
+              rows.push(allArray[0])
+            } else {
+              rows.push(allArray[index + 1])
+            }
+            return rows
+          }, [])
+        state.set('colorPatternEditModule.allItemsColors', newItems)
+      },
+      redirectWithData
+    ],
+    downButtonPressed: [
+      ({state}) => {
+        const newItems = state.get(`colorPatternEditModule.allItemsColors`)
+          .reduce((rows, currRow, index, allArray) => {
+            if (index === 0) {
+              rows.push(allArray[allArray.length - 1])
+            } else {
+              rows.push(allArray[index - 1])
+            }
+            return rows
+          }, [])
+        state.set('colorPatternEditModule.allItemsColors', newItems)
+      },
       redirectWithData
     ]
   }
