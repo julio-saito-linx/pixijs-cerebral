@@ -132,28 +132,7 @@ export default connect(
               <a className='linkItem' href='/colorPatternEdit'>
                 Edit
               </a>
-              <div className='inputContainer'>
-                <label htmlFor='gridSize'>
-                  Grid size:
-                </label>
-                <span>
-                  {this.state.gridSize}
-                </span>
-                <input
-                  id='gridSize'
-                  type='range'
-                  min={this.props.colors.length * 5}
-                  max={this.props.colors.length * 20}
-                  step='1'
-                  value={this.state.gridSize}
-                  onChange={(e) => {
-                    this.setState({
-                      gridSize: Number(e.target.value),
-                      mustRedrawGrid: true
-                    })
-                  }}
-                />
-              </div>
+
               <div className='inputContainer'>
                 <label htmlFor='gridSize'>
                   Zoom level:

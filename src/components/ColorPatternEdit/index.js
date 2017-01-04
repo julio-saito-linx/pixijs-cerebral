@@ -172,6 +172,10 @@ export default connect(
               />
             </div>
 
+            <a className='linkItem' href='/colorPatternView'>
+              View
+            </a>
+
             <div id='buttons'>
               <button color='#777' onClick={() => {
                 this.props.leftButtonPressed()
@@ -192,9 +196,7 @@ export default connect(
             </div>
 
             <div className='controlsContainer'>
-              <a className='linkItem' href='/colorPatternView'>
-                View
-              </a>
+
               <div className='inputContainer'>
                 <label htmlFor='gridSize'>
                   Grid size:

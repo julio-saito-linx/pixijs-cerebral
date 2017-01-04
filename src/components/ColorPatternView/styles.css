@@ -19,10 +19,11 @@
   color: cornsilk;
 }
 
-#pattern-viewer-container > .controlsContainer > .linkItem {
-  color: cornsilk;
-  font-size: 24px;
-  margin: 20px;
+#pattern-viewer-container .linkItem {
+  border: 1px solid darkgrey;
+  padding: 4px;
+  font-size: 180%;
+  color: white;
 }
 
 #pattern-viewer-container > .canvasContainer {

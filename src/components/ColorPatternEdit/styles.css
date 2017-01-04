@@ -15,9 +15,10 @@
   margin: 10px;
 }
 
-#pattern-editor-container > .controlsContainer > .linkItem {
-  font-size: 24px;
-  margin: 20px;
+#pattern-editor-container .linkItem {
+  border: 1px solid darkgrey;
+  padding: 4px;
+  font-size: 180%;
 }
 
 #pattern-editor-container > .canvasContainer {
